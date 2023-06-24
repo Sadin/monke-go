@@ -11,8 +11,8 @@ import (
 func TestNextToken(t *testing.T) {
 	input := `=+(){},;`
 
-	test := []struct {
-		expectedType	token.tokenType
+	tests := []struct {
+		expectedType	token.TokenType
 		expectedLiteral string
 	}{
 		{token.ASSIGN, "="},
@@ -29,7 +29,7 @@ func TestNextToken(t *testing.T) {
 	l := New(input)
 
 	for i, tt := range tests {
-		tok := l.Nexttoken()
+		tok := l.NextToken()
 
 		if tok.Type != tt.expectedType {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
@@ -38,7 +38,7 @@ func TestNextToken(t *testing.T) {
 
 		if tok.Literal != tt.expectedLiteral {
 			t.Fatalf("tests[%d] - literal wrong. expected=%q, got =%q",
-				i, tt.expecedLiteral, tok.Literal)
+				i, tt.expectedLiteral, tok.Literal)
 		}
 	}
 }
